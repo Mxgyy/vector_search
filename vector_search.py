@@ -99,16 +99,6 @@ class MyFaiss:
             self.vector_store.delete(id2delete)
             self.vector_store.save_local(self.vdb_path)
             os.remove(f"{data_path}\\{file}.txt")
-            # while True:
-            #     para2delete = self.vector_store.search("*", k=20,search_type="similarity",filter={"file": file})
-            #     # para2delete = self.loop_search(300,filter={"file": file})
-            #     id2delete = [para.metadata['id'] for para in para2delete]
-            #     #id2delete = self.loop_search(300,filter={"file": file})
-            #     if len(id2delete) == 0:
-            #         break
-            #     self.vector_store.delete(id2delete)
-            #     self.vector_store.save_local(self.vdb_path)
-            #     time.sleep(0.5)
 
     def update(self):
         pre_list = read_filenames(self.filelst_path)
@@ -144,13 +134,13 @@ if __name__ == '__main__':
     vdb = MyFaiss(vdb_path,documents_path,filelst_path,Myembedding_func(model))
 
     vdb.update()
-    res = vdb.search("如何制造离心机",10)
+    res = vdb.search("离心机测试设备指标是什么",10)
     for doc in res:
         print("文档:",doc.metadata["file"])
-        # print("内容:",doc.page_content)
-        # print("ID:",doc.metadata["id"])
-        # print("-------------------------------------------------")
-        # print("-------------------------------------------------")
+        print("内容:",doc.page_content)
+        print("ID:",doc.metadata["id"])
+        print("-------------------------------------------------")
+        print("-------------------------------------------------")
         
 
     
